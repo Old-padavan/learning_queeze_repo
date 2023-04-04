@@ -21,6 +21,7 @@ async def process_help_command(message: Message):
 
 # Этот хэндлер будет срабатывать на отправку боту фото
 async def send_photo_echo(message: Message):
+    print(message)
     await message.reply_photo(message.photo[0].file_id)
 
 # Этот хэндлер будет срабатывать на любые ваши текстовые сообщения,
