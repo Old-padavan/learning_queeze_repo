@@ -36,7 +36,7 @@ async def process_start_command(message: Message):
 @dp.message(Command(commands=['help']))
 async def process_help_command(message: Message):
     await message.answer(f'Правила игры:\n\nЯ загадываю число от 1 до 100, '
-                         f'а вам нужно его угадать\nУ вас есть {ATTEMPTS} '
+                         f'а вам нужно его угадать\nУ вас есть {attempts} '
                          f'попыток\n\nДоступные команды:\n/help - правила '
                          f'игры и список команд\n/cancel - выйти из игры\n'
                          f'/stat - посмотреть статистику\n\nДавай сыграем?')
