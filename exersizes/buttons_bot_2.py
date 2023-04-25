@@ -13,14 +13,14 @@ dp: Dispatcher = Dispatcher()
 kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
 
 # Создаем список с кнопками
-buttons_1: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}') for i in range(8)]
+buttons_1: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}') for i in range(10)]
 
 # Распаковываем второй список с кнопками методом add
 kb_builder.add(*buttons_1)
 
-# Явно сообщаем билдеру сколько хотим видеть кнопок в 1-м и 2-м рядах
-# можно сообщать количество кнопок для каждого ряда, начиная с первого
-kb_builder.adjust(1, 3)
+# Явно сообщаем билдеру сколько хотим видеть кнопок в 1-м и 2-м рядах,
+# а также говорим методу повторять такое размещение для остальных рядов
+kb_builder.adjust(2, 1, repeat=True)
 
 # Этот хэндлер будет срабатывать на команду "/start"
 # и отправлять в чат клавиатуру
