@@ -15,15 +15,17 @@ kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
 # Создаем список с кнопками (например, 10 кнопок)
 buttons: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}') for i in range(10)]
 
-# Методами билдера добавляем в него кнопки (возьмем для примера метод row())
-kb_builder.row(*buttons)
+# Распаковываем список с кнопками в билдер, указываем, что
+# в одном ряду должно быть 4 кнопки
+kb_builder.row(*buttons, width=4)
 
 # Этот хэндлер будет срабатывать на команду "/start"
 # и отправлять в чат клавиатуру
 @dp.message(CommandStart())
 async def process_command_start(message: Message):
 # Методом as_markup() передаем клавиатуру как аргумент туда, где она требуется
-    await message.answer(text='Вот такая получается клавиатура', reply_markup=kb_builder.as_markup())
+    await message.answer(text='Вот такая получается клавиатура', reply_markup=kb_builder.as_markup(
+        resize_keyboard=True))
 
 if __name__ == '__main__':
     dp.run_polling(bot)
