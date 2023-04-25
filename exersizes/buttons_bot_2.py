@@ -13,18 +13,17 @@ dp: Dispatcher = Dispatcher()
 kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
 
 # Создаем первый список с кнопками
-buttons_1: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}') for i in range(6)]
+buttons_1: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 1}') for i in range(5)]
 
 ## Создаем второй список с кнопками
-buttons_2: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 7}') for i in range(4)]
+buttons_2: list[KeyboardButton] = [KeyboardButton(text=f'Кнопка {i + 6}') for i in range(10)]
 
-# Распаковываем список с кнопками в билдер, указываем, что
-# в одном ряду должно быть 4 кнопки
+# Распаковываем список с кнопками в билдер методом row,
+# указываем, что в одном ряду должно быть 4 кнопки
 kb_builder.row(*buttons_1, width=4)
 
-# Еще раз распаковываем список с кнопками в билдер, указываем, что
-# теперь в одном ряду должно быть 3 кнопки
-kb_builder.row(*buttons_2, width=3)
+# Распаковываем второй список с кнопками методом add
+kb_builder.add(*buttons_2)
 
 # Этот хэндлер будет срабатывать на команду "/start"
 # и отправлять в чат клавиатуру
