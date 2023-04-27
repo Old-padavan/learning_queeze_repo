@@ -15,11 +15,15 @@ kb_builder: ReplyKeyboardBuilder = ReplyKeyboardBuilder()
 # Создаем кнопки
 contact_btn: KeyboardButton = KeyboardButton(text='Отправить телефон', requst_contact=True)
 geo_btn: KeyboardButton = KeyboardButton(text='Отправить геопозицию', request_location=True)
-poll_btn: KeyboardButton = KeyboardButton(text='Создать викторину или опрос',
-                                          request_poll=KeyboardButtonPollType())
+# poll_btn: KeyboardButton = KeyboardButton(text='Создать викторину или опрос',
+#                                           request_poll=KeyboardButtonPollType())
+poll_btn_2: KeyboardButton = KeyboardButton(text='Cоздать опрос',
+                                            request_poll=KeyboardButtonPollType(type='regular'))
+quiz_btn: KeyboardButton = KeyboardButton(text='Создать викторину',
+                                            request_poll=KeyboardButtonPollType(type='quiz'))
 
 # Добавляем кнопки в билдер
-kb_builder.row(contact_btn, geo_btn, poll_btn)
+kb_builder.row(contact_btn, geo_btn, poll_btn_2, quiz_btn)
 
 # Создаем объект клавиатуры
 keyboard: ReplyKeyboardMarkup = kb_builder.as_markup(resize_keyboard=True, one_time_keyboard=True)
