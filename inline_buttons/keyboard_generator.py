@@ -34,7 +34,7 @@ BUTTONS: dict[str, str] = {
     'btn_11': '11'}
 
 # Функция для генерации инлайн-клавиатур "на лету"
-def create_inline_kb(width, *args, **kwargs) -> InlineKeyboardMarkup:
+def create_inline_kb(width, *args, last_btn: str | None = None, **kwargs) -> InlineKeyboardMarkup:
     # Инициализируем билдер
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     # Инициализируем список для кнопок
@@ -49,6 +49,9 @@ def create_inline_kb(width, *args, **kwargs) -> InlineKeyboardMarkup:
             buttons.append(InlineKeyboardButton(text=text, callback_data=button))
     # Распаковываем список с кнопками в билдер методом row c параметром width
     kb_builder.row(*buttons, width=width)
+    # Добавляем в билдер последнюю кнопку, если она передана в функцию
+    if last_btn:
+        kb_builder.row(InlineKeyboardButton(text=last_btn, callback_data='last_btn'))
     # Возвращаем объект инлайн-клавиатуры
     return kb_builder.as_markup()
 
@@ -56,7 +59,7 @@ def create_inline_kb(width, *args, **kwargs) -> InlineKeyboardMarkup:
 # и отправлять в чат клавиатуру
 @dp.message(CommandStart())
 async def process_command_start(message: Message):
-    keyboard = create_inline_kb(2, 'but_1', 'but_3', 'but_7')
+    keyboard = create_inline_kb(2, last_btn='Последняя кнопка', **BUTTONS)
     await message.answer(text='Вот такая получается клавиатура', reply_markup=keyboard)
 
 if __name__ == '__main__':
